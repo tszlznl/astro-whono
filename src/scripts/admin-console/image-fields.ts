@@ -93,7 +93,21 @@ const setPreview = (
       previewWrap.hidden = true;
       return;
     }
-    previewImg.src = state.src;
+
+    const safePreviewSrc = getAdminRenderedImagePreviewSrc(state.src, base);
+    if (!safePreviewSrc) {
+      previewWrap.setAttribute('data-admin-images-preview-state', 'hidden');
+      previewWrap.hidden = true;
+      previewImg.removeAttribute('src');
+      previewImg.hidden = true;
+      if (previewPlaceholder instanceof HTMLElement) {
+        previewPlaceholder.textContent = '';
+        previewPlaceholder.hidden = true;
+      }
+      return;
+    }
+
+    previewImg.src = safePreviewSrc;
     previewImg.hidden = false;
     if (previewPlaceholder instanceof HTMLElement) {
       previewPlaceholder.textContent = '';
