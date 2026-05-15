@@ -32,9 +32,9 @@ const shouldShowMetaLine = articleMetaSettings.showDate || (articleMetaSettings.
   data-slug={slug || undefined}
 >
   <div class="list-item__row">
-    <div style="display:flex; align-items:center; gap:10px;">
+    <div style="display:flex; align-items:center; gap:10px; min-width:0;">
       <span class="badge">{displayBadge}</span>
-      <h2 class="list-item__title" style="margin:0;">{title}</h2>
+      <h2 class="list-item__title" style="margin:0; min-width:0;">{title}</h2>
     </div>
   </div>
   {excerpt ? <p class="list-item__excerpt">{excerpt}</p> : null}
@@ -47,7 +47,7 @@ const shouldShowMetaLine = articleMetaSettings.showDate || (articleMetaSettings.
       ) : null}
       {articleMetaSettings.showTags && visibleTags.length ? (
         <span class="meta-line__item meta-line__item--tags">
-          {visibleTags.map((tag) => <span class="tag">#{tag}</span>)}
+          {visibleTags.map((tag) => (<span class="tag">#{tag}</span>))}
         </span>
       ) : null}
     </div>
